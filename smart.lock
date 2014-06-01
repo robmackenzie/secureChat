@@ -1,0 +1,27 @@
+{
+  "meteor": {},
+  "dependencies": {
+    "basePackages": {
+      "sjcl": {},
+      "timeago": {},
+      "bootstrap-3": {}
+    },
+    "packages": {
+      "sjcl": {
+        "git": "https://github.com/siggioskarsson/meteor-sjcl.git",
+        "tag": "v1.1.5",
+        "commit": "30e4e4ee89e12ed26207c31fef760181bb813f4e"
+      },
+      "timeago": {
+        "git": "https://github.com/BeDifferential/timeago.git",
+        "tag": "v0.0.3",
+        "commit": "39135ea44ba69503d6b1e1e17431a57cb315cb21"
+      },
+      "bootstrap-3": {
+        "git": "https://github.com/mangasocial/meteor-bootstrap-3.git",
+        "tag": "v3.1.1-1",
+        "commit": "63dd38968828bb8963636df93e9a1c45e2dfe67e"
+      }
+    }
+  }
+}

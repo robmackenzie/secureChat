@@ -1,0 +1,31 @@
+#messages {
+height:600px;
+box-shadow:0 0 10px rgba(0,0,0,.5);
+overflow:auto;
+}
+#dataEntries {
+padding: 10px;
+}
+.message {
+color:#000;
+background:#ababab;
+margin-left:0;
+margin-right:0;
+-webkit-animation-name:flip;
+-webkit-animation-duration:500ms;
+border-bottom:1px solid rgba(0,0,0,.1);
+padding:0 12px;
+}
+.my-message {
+background:#c7c7c7;
+color:#000;
+text-align:right;
+}
+.message_info {
+font-size:10px;
+color:#5C5C5C;
+}
+
+body {
+  padding-top: 50px;
+}

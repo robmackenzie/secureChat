@@ -1,0 +1,141 @@
+<head>
+  <title>Sechat</title>
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  {{> header}}
+  <div id="main" class="container">
+  <div class="row">
+  <div  class="col-md-6 col-md-offset-3">
+    {{> dataentry}}
+    {{> messageblock}}
+    {{> footer}}
+  </div>
+  </div>
+  </div>
+  {{> login_modal}}
+  {{> info_modal}}
+</body>
+
+<template name="header">
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#"><strong>Secure</strong> chat for bypassing silly firewalls</a>
+        </div>
+      </div>
+    </div>
+</template>
+
+
+<template name="messageblock">
+  <div id="messages" class="row" >
+        {{#each get_messages}}
+            {{> message}}
+        {{/each}}
+  </div>
+</template>
+
+<template name="message">
+  <div class="row message {{#if is_owner}}my-message{{/if}}">
+    <p class="message_info">
+      <span class="name">{{name}}</span>,
+      <time class="timeago" title="{{get_human_date}}" datetime="{{time}}">{{get_human_date}}</time>
+    </p>
+    <p class="message_text">
+      {{decrypt_message}}
+    </p>
+  </div>
+</template>
+
+<template name="dataentry">
+  <div id="dataEntries" class="row">
+    <form role="form">
+      <div class="input-group">
+        <label class="sr-only" for="messageInput">Your Message</label>
+        <input type="text" class="form-control" id="messageInput" placeholder="..." autofocus="autofocus">
+        <div class="input-group-btn">
+          <div class="input-group-btn">
+            <button id="sendMessage" type="submit" class="btn btn-default">Send</button>
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            <span class="caret"></span>
+            <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a id="edit" href="#modal-login" data-toggle="modal"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Login</a></li>
+              <li class="divider"></li>
+              <li><a id="info" href="#modal-info" data-toggle="modal"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;Info</a></li>
+            </ul>
+          </div>
+          <!-- Button and dropdown menu -->
+        </div>
+      </div>
+    </form>
+  </div>
+</template>
+
+<template name="login_modal">
+  <!-- Modal -->
+  <div id="modal-login" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">Login Information</h4>
+        </div>
+        <div class="modal-body">
+          <form role="form">
+            <div class="form-group">
+              <label for="my_name">User Name</label>
+              <input type="text" class="form-control" id="my_name" placeholder="Username">
+            </div>
+            <div class="form-group">
+              <label for="cifer_key">Encryption Key</label>
+              <input type="password" class="form-control" id="cifer_key" placeholder="Password">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button id="login_submit" type="button" class="btn btn-primary">Continue</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+
+<template name="info_modal">
+  <!-- Modal -->
+  <div class="modal fade" id="modal-info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">Secure chat app</h4>
+        </div>
+        <div class="modal-body">
+          <li>To <strong>bold text</strong>, use two asterisks to quote the text you want bolded. Ex. This is normal, **this text will be bolded** <br /> Links are automatically recognized if they look like common links. Try adding http:// in front if you are having trouble.</li>
+          <li>This was made so people could talk when they otherwise couldn't. All data is encrypted on the client side with AES using the provided key as the cipher. Your key is also hashed with SHA256, which is used to retrieve the messages from the database. You can not retrieve the messages without this hash. This site forces SSL, wrapping the above two security schemes.</li>
+          <li>The key is never transmitted, it is only stored in your browser's JavaScript memory. It is deleted when you leave this page.</li>
+          <li>Sorry NSA, there is no way to recover this data without the key.</li>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="footer">
+  <div id="footer" class="row">
+    <p>
+      There are _ connected user(s).
+    </p>
+  </div>
+</template>
+
